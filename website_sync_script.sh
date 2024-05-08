@@ -19,7 +19,7 @@ BACKUP_DIR="$HOME/old-site-backup/$(date +'%Y-%m-%d_%H-%M-%S')"
 WEBSITE_CONF="website.conf"
 
 # Disable website configuration
-echo "a2dissite $WEBSITE_CONF"
+a2dissite $WEBSITE_CONF
 
 # Backup current contents of website directory
 mkdir -p $BACKUP_DIR
@@ -46,7 +46,7 @@ chown -R www-data:www-data $WEBSITE_DIR
 # Check if file ownership is already 'www-data'
 if [ "$(stat -c '%U' $WEBSITE_DIR)" = "www-data" ]; then
     # If ownership is 'www-data', enable website configuration
-    echo "a2ensite $WEBSITE_CONF"
+    a2ensite $WEBSITE_CONF
 else
     echo "Warning: Ownership of $WEBSITE_DIR is not 'www-data'. Website configuration will not be enabled."
 fi
